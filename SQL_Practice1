@@ -1,0 +1,63 @@
+Query to CREATE DATABASE 
+CREATE DATABASE bigdatabootcamp;
+CREATE DATABASE test1;
+
+Query To check all Databases 
+SHOW DATABASES;
+
+Query To Delete Database
+DROP DATABASE test1;
+
+Query to Select Database in which you want to work
+use bigdatabootcamp;
+
+Query to Create Table 
+CREATE Table employee
+(
+    id int,
+    name VARCHAR(50)
+);
+
+SHOW TABLES;
+
+Query To check TABLE DEFINITION
+SHOW CREATE TABLE employee;
+
+Query To Delete Table
+DROP Table employee;
+
+CREATE Table if NOT exists employee
+(
+    id int,
+    name VARCHAR(50),
+    salary DOUBLE,
+    hiring_date DATE
+);
+ 
+Query To Insert Data in Table
+INSERT INTO employee VALUES(1,'Saurabh',15000,'2021-08-30');
+INSERT INTO employee VALUES(2,'Amar',17000,'2020-08-30'),(3,'Rohit',15000,'2021-08-30');
+INSERT INTO employee(name,id,hiring_date) VALUES('Shagun',4,'2021-08-30');
+
+SELECT * FROM employee;
+
+Create Table by using Integrity Constraints
+CREATE Table if NOT exists employee_with_constraints
+(
+    id int NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    salary DOUBLE check(salary>1000),
+    hiring_date DATE DEFAULT '2021-08-08',
+    UNIQUE (id)
+);
+
+INSERT INTO employee_with_constraints VALUES(3,'Shagun',1100,'2000-08-30');
+INSERT INTO employee_with_constraints(id,name,salary) VALUES (6,'Lavi',1100);
+
+
+SELECT * from employee_with_constraints;
+
+
+
+
+
