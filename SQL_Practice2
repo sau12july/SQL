@@ -1,0 +1,139 @@
+--Query to create DB 
+CREATE DATABASE bigdatabootcamp;
+
+--Query to Select Database in which you want to work
+use bigdatabootcamp;
+
+--Query to Create Table 
+CREATE Table if NOT exists Employee
+(
+    id int,
+    name VARCHAR(50),
+    State VARCHAR(50),
+    city VARCHAR(50)
+);
+
+--Query To Insert Data in Table
+INSERT INTO `Employee` VALUES(1,'Sauabh','UP','Dhampur');
+
+SELECT * from `Employee`;
+
+--Query To Add a column in Existing Table
+ALTER Table `Employee` ADD DOB DATE;
+
+--Query to Modify a column in Existing Table
+ALTER TABLE `Employee` MODIFY COLUMN name VARCHAR(100);
+
+--Query to Delete a particular column in Existing Table
+ALTER Table `Employee` DROP COLUMN city;
+
+
+--Query to Rename a particular column in Existing Table
+ALTER Table `Employee` RENAME COLUMN name to full_name;
+
+--Query to Add integrity Constraint to a particular column in Existing Table
+ALTER Table `Employee` ADD constraint id_unique UNIQUE(id);
+
+--Query to Drop integrity Constraint to a particular column in Existing Table
+ALTER Table `Employee` drop constraint id_unique;
+
+--Query to Create Table with primary key
+create Table if not exists person
+(
+    id int,
+    name VARCHAR(50),
+    age int,
+    --PRIMARY KEY (id)
+    constraint pk PRIMARY KEY (id)      
+);
+
+
+
+--Query to insert data in Person Table
+INSERT INTO person VALUES(1,'Saurabh',22);
+INSERT INTO person VALUES(1,'Shagun',21);       ---Failed
+INSERT INTO person VALUES(NULL,'Shagun',21);    ---Failed
+INSERT INTO person VALUES(3,'Amar',21);
+
+--Query to Add Integrity Constraint 
+ALTER Table person ADD constraint age_unique UNIQUE(age);
+
+--Query to Drop Integrity Constraint 
+ALTER Table person DROP constraint age_unique;
+
+--Create table for foreign Key Demo
+create Table if not exists customer
+(
+    cust_id int,
+    name varchar(50),
+    age int,
+    constraint pk PRIMARY KEY (cust_id) 
+
+);
+
+create Table if not exists orders
+(
+    order_id int,
+    order_num INT,
+    Customer_id int,
+    constraint pk PRIMARY KEY (order_id),
+    constraint fk FOREIGN KEY (Customer_id) REFERENCES customer(cust_id)
+);
+
+
+--Query to Differenciate between truncate and drop command
+TRUNCATE TABLE person;  -- Delete data only
+
+DROP Table person;  -- Delete whole table with schema
+
+--Creating a table to practice basis queries
+create table if not exists employee(
+    id int,
+    name VARCHAR(50),
+    age int,
+    hiring_date date,
+    salary int,
+    city varchar(50)
+);
+
+insert into employee values(1,'Shashank', 24, '2021-08-10', 10000, 'Lucknow');
+
+insert into employee values(2,'Rahul', 25, '2021-08-10', 20000, 'Khajuraho');
+
+insert into employee values(3,'Sunny', 22, '2021-08-11', 11000, 'Banaglore');
+
+insert into employee values(5,'Amit', 25, '2021-08-11', 12000, 'Noida');
+
+insert into employee values(1,'Puneet', 26, '2021-08-12', 50000, 'Gurgaon');
+
+--Query to count total no. of rows
+SELECT COUNT(*) as total_rows FROM employee;
+
+--Query to select specific columns
+SELECT name,salary FROM employee;
+
+--Query to print unique hiring_dates
+SELECT distinct(hiring_date) from employee;
+
+--Query to print how many unique age values in the table?
+SELECT COUNT(DISTINCT(age)) as Total_unique_age FROM employee;
+
+--Query to print Increment salary of each employee by 20%.
+SELECT id,
+    name,
+    salary as old_salary,
+    salary + (salary*20)/100 as new_salary 
+    FROM employee;
+
+--Query to Update Increment salary of each employee by 20%.
+UPDATE employee set salary = salary + (salary*20)/100;
+
+--Query to filter data using Where Clause
+SELECT * from employee WHERE hiring_date = '2021-08-10';
+
+--Query to Update the salary of employees who joined the company on 2021-08-10 to 80000 
+UPDATE employee set salary = 80000 WHERE hiring_date = '2021-08-10';
+
+--Query to delete records of those employess who joined company on 2021-08-1
+DELETE from employee WHERE hiring_date = '2021-08-10';
+
