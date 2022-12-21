@@ -41,7 +41,7 @@ INSERT INTO employee(name,id,hiring_date) VALUES('Shagun',4,'2021-08-30');
 
 SELECT * FROM employee;
 
-Create Table by using Integrity Constraints
+Query to Create Table by using Integrity Constraints
 CREATE Table if NOT exists employee_with_constraints
 (
     id int NOT NULL,
